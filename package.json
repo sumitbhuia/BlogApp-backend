@@ -1,0 +1,30 @@
+{
+  "name": "blogapp",
+  "scripts": {
+    "dev": "wrangler dev src/index.ts",
+    "deploy": "wrangler deploy --minify src/index.ts",
+    "env": "dotenv -e .dev.vars"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.16.1",
+    "@prisma/extension-accelerate": "^1.1.0",
+    "dotenv": "^16.4.5",
+    "dotenv-expand": "^11.0.6",
+    "hono": "^4.4.12"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20240529.0",
+    "@types/node": "^20.14.10",
+    "dotenv-cli": "^7.4.2",
+    "prisma": "^5.16.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.3",
+    "wrangler": "^3.57.2"
+  },
+  "description": "``` npm install npm run dev ```",
+  "version": "1.0.0",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
