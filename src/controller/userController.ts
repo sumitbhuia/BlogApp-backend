@@ -37,10 +37,10 @@ export async function signup(c:Context) {
         const {username , email , password} = body;
 
         const parsedUser = signUpSchema.safeParse(body);
-        
+       
         // Zod error handling
         if(!parsedUser.success){
-            c.json('Invalid user input', StatusCodes.BAD_REQUEST);
+            return c.json('Invalid user input', StatusCodes.BAD_REQUEST);
         }
         
         const checkUser = await prisma.user.findFirst({
@@ -51,7 +51,7 @@ export async function signup(c:Context) {
         
         // Check if user already exists
         if(checkUser?.email == email){
-            c.json('User already exists', StatusCodes.BAD_REQUEST);
+            return c.json('User already exists', StatusCodes.BAD_REQUEST);
         }
 
         const newUser = await prisma.user.create({
@@ -94,7 +94,7 @@ export async function signin(c:Context) {
 
         //Zod error handling
         if(!parsedUser.success){
-            c.json('Invalid user input', StatusCodes.BAD_REQUEST);
+            return c.json('Invalid user input', StatusCodes.BAD_REQUEST);
         }
         const {email , password} = body;
 
@@ -107,7 +107,7 @@ export async function signin(c:Context) {
 
         // Checking if user exists
         if(!checkUser){
-            c.json('User not found', StatusCodes.BAD_REQUEST);
+            return c.json('User not found', StatusCodes.BAD_REQUEST);
         }
 
         //  This is not required as prisma will throw an error if user not found
@@ -169,7 +169,7 @@ export async function getUserById(c:Context) {
             return c.json(user);
             
         } catch (error) {
-            c.json(`Error finding user by id . ${error} ` , StatusCodes.NOT_FOUND);
+            return c.json(`Error finding user by id . ${error} ` , StatusCodes.NOT_FOUND);
             
         }
 }
